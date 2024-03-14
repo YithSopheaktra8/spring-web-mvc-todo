@@ -34,6 +34,11 @@
         </div>
     </form>
 </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary my-3" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#exampleModal">
+    Create New Todo
+</button>
+
 <table class="table align-middle mb-0 bg-white container" style="table-layout : fixed; text-align: center">
     <thead class="bg-light">
     <tr>
@@ -58,11 +63,44 @@
         <td>
             <button type="button" class="btn btn-primary" >Edit</button>
             <button type="button" class="btn btn-danger" >Delete</button>
+            <form action="/todo/markDone" method="get">
+                <input type="hidden" name="id" th:value="${todo.id}" />
+                <button type="submit" class="btn btn-success mt-3">Mark Done</button>
+            </form>
         </td>
     </tr>
     </tbody>
 </table>
+<!--modal-->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Todo</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="todo/new" method="get" th:object="${newTodo}">
+                    <!-- Email input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="form1Example1" class="form-control" th:field="*{task}"/>
+                        <label class="form-label" for="form1Example1">Task</label>
+                    </div>
 
+                    <!-- Password input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="form1Example2" class="form-control" th:field="*{description}"/>
+                        <label class="form-label" for="form1Example2">Task Description</label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
 </body>
 </html>

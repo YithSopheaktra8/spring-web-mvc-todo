@@ -16,5 +16,5 @@ public class Todo {
     private String task;
     private String description;
     private boolean isDone;
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDate createdAt;
 }

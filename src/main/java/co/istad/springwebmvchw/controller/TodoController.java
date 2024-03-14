@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +19,7 @@ public class TodoController {
     @GetMapping("/todo")
     public String getAllTodos(Model model){
         model.addAttribute("todos", todoService.findAllTodos());
+        model.addAttribute("newTodo", new Todo());
         return "index";
     }
 
@@ -33,5 +35,17 @@ public class TodoController {
         Todo todo = todoService.getTodoById(id);
         model.addAttribute("todo",todo);
         return "todo";
+    }
+
+    @GetMapping("/todo/new")
+    public String newTodo(@ModelAttribute("newTodo") Todo todo){
+        todoService.save(todo);
+        return "redirect:/todo";
+    }
+
+    @GetMapping("/todo/markDone")
+    public String markTodoAsDone(@RequestParam("id") Integer id) {
+        todoService.markAsDone(id);
+        return "redirect:/todo";
     }
 }
