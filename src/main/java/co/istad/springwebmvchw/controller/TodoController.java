@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class TodoController {
@@ -29,14 +31,14 @@ public class TodoController {
         model.addAttribute("todo",todo);
         return "todo";
     }
-
     @GetMapping("/todo/search")
-    public String searchTodoById(Model model, @RequestParam("id") Integer id){
-        Todo todo = todoService.getTodoById(id);
-        model.addAttribute("todo",todo);
-        return "todo";
+    public String searchTodoByTask(Model model, @RequestParam("task") String task){
+        System.out.println(task);
+        List<Todo> todo = todoService.searchByTask(task);
+        System.out.println(todo);
+        model.addAttribute("todos",todo);
+        return "result";
     }
-
     @GetMapping("/todo/new")
     public String newTodo(@ModelAttribute("newTodo") Todo todo){
         todoService.save(todo);
@@ -48,4 +50,5 @@ public class TodoController {
         todoService.markAsDone(id);
         return "redirect:/todo";
     }
+
 }

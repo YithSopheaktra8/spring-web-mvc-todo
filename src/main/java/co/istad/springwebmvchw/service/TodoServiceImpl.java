@@ -39,13 +39,29 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo update(Todo todo) {
-        return null;
+    public void update(Todo todo) {
+        todoRepository.getAllTodos()
+                .stream()
+                .filter(t -> t.getId().equals(todo.getId()))
+                .forEach(t -> {
+                    t.setId(todo.getId());
+                    t.setTask(todo.getTask());
+                    t.setDescription(todo.getDescription());
+                    t.setDone(todo.isDone());
+                    t.setCreatedAt(LocalDate.now());
+                });
+
     }
 
     @Override
     public void delete(Integer id) {
-
+        List<Todo> todoList = todoRepository.getAllTodos();
+        for (Todo todo : todoList) {
+            if (todo.getId().equals(id)) {
+                todoList.remove(todo);
+                break;
+            }
+        }
     }
 
     @Override
@@ -56,5 +72,14 @@ public class TodoServiceImpl implements TodoService {
                 todo.setDone(true);
             }
         }
+    }
+
+    @Override
+    public List<Todo> searchByTask(String task) {
+        List<Todo> todoList = todoRepository.getAllTodos();
+        return todoList.stream()
+                .filter(todo -> todo.getTask().toLowerCase().contains(task.toLowerCase()))
+                .filter(todo -> todo.isDone() == true)
+                .toList();
     }
 }

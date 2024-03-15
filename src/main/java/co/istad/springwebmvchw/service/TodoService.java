@@ -8,7 +8,8 @@ public interface TodoService {
     List<Todo> findAllTodos();
     Todo getTodoById(Integer id);
     void save(Todo todo);
-    Todo update(Todo todo);
+    void update(Todo todo);
     void delete(Integer id);
     void markAsDone(Integer id);
+    List<Todo> searchByTask(String task);
 }
