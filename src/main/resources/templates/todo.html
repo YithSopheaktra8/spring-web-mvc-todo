@@ -20,8 +20,8 @@
   />
 </head>
 <body>
-<h1 class="text-center my-5">Todo list</h1>
-<table class="table align-middle mb-0 bg-white container" style="table-layout : fixed; text-align: center">
+<h1 th:if="${not #lists.isEmpty(todo)}" class="text-center my-5">Todo list</h1>
+<table th:if="${not #lists.isEmpty(todo)}" class="table align-middle mb-0 bg-white container" style="table-layout : fixed; text-align: center">
   <thead class="bg-light">
   <tr>
     <th>#Id</th>
@@ -43,13 +43,29 @@
     </td>
     <td th:text="${#temporals.format(todo.createdAt, 'yyyy-MM-dd')}"></td>
     <td>
-      <button type="button" class="btn btn-primary" >Edit</button>
-      <button type="button" class="btn btn-danger" >Delete</button>
+      <!-- Button to trigger edit modal -->
+      <a th:href="@{/update/{id}(id=${todo.id})}" class="btn btn-primary">Update</a>
+      <form action="/todo/delete" method="get" class="d-inline">
+        <input type="hidden" name="id" th:value="${todo.id}" />
+        <button type="submit" class="btn btn-danger mt-3">Delete</button>
+      </form>
+      <form action="/todo/markDone" method="get">
+        <input type="hidden" name="id" th:value="${todo.id}" />
+        <button type="submit" class="btn btn-success mt-3">Mark Done</button>
+      </form>
     </td>
   </tr>
   </tbody>
 </table>
+<!-- Check if todos list is empty and display message below the table -->
+<div th:if="${#lists.isEmpty(todo)}" class="text-center mt-5">
+  <h1 class="text-danger">No todo list found.</h1>
+</div>
 
+<form action="/todo" method="get" class="text-center">
+  <button type="submit" class="btn btn-primary mt-3 ">Back
+  </button>
+</form>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
 </body>
 </html>

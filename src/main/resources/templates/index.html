@@ -66,8 +66,12 @@
             </td>
             <td th:text="${#temporals.format(todo.createdAt, 'yyyy-MM-dd')}"></td>
             <td>
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger" >Delete</button>
+                <!-- Button to trigger edit modal -->
+                <a th:href="@{/update/{id}(id=${todo.id})}" class="btn btn-primary">Update</a>
+                <form action="/todo/delete" method="get" class="d-inline">
+                    <input type="hidden" name="id" th:value="${todo.id}" />
+                    <button type="submit" class="btn btn-danger mt-3">Delete</button>
+                </form>
                 <form action="/todo/markDone" method="get">
                     <input type="hidden" name="id" th:value="${todo.id}" />
                     <button type="submit" class="btn btn-success mt-3">Mark Done</button>
@@ -106,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     </body>
     </html>

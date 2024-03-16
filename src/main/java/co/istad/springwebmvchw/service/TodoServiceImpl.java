@@ -79,7 +79,6 @@ public class TodoServiceImpl implements TodoService {
         List<Todo> todoList = todoRepository.getAllTodos();
         return todoList.stream()
                 .filter(todo -> todo.getTask().toLowerCase().contains(task.toLowerCase()))
-                .filter(todo -> todo.isDone() == true)
                 .toList();
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class TodoRepository {
-
     public List<Todo> getAllTodos(){
         return TodoListDataSource.todoList;
     }

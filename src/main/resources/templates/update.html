@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HOMEPAGE</title>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+            rel="stylesheet"
+    />
+</head>
+<body class="container">
+<h1 class="text-center my-5">Update Todo list</h1>
+<!--<form action="#" th:action="@{/update}" method="get" th:object="${todo}" class="mt-3">-->
+<!--        <input type="hidden" class="form-control" th:field="*{id}">-->
+<!--        <div class="mb-3">-->
+<!--            <label class="form-label">Task</label>-->
+<!--            <label>-->
+<!--                <input type="text" class="form-control" th:field="*{task}">-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <label class="form-label">Description</label>-->
+<!--            <label>-->
+<!--                <input type="text" class="form-control" th:field="*{description}">-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--    </form>-->
+<!--    <form action="/todo" method="get">-->
+<!--        <button type="submit" class="btn btn-primary mt-3">Back-->
+<!--        </button>-->
+<!--    </form>-->
+<form action="#" th:action="@{/update}" method="get" th:object="${todo}" class="mt-3 text-center">
+    <input type="hidden" class="form-control" th:field="*{id}">
+    <!-- Task input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" id="form1Example1" class="form-control" th:field="*{task}" />
+        <label class="form-label" for="form1Example1">Task</label>
+    </div>
+
+    <!-- Task Description input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <textarea  id="form1Example2" class="form-control" rows="10" th:field="*{description}"></textarea>
+        <label class="form-label" for="form1Example2">Task Description</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <form action="/todo" method="get" >
+        <button type="submit" class="btn btn-primary mt-3">Back</button>
+    </form>
+</form>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+</body>
+</html>
